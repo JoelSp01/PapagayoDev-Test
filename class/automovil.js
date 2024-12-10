@@ -1,33 +1,32 @@
-export class Automovil {
-    placa: string;
-    fecha: string;
-    hora: string
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Automovil = void 0;
+class Automovil {
     //constructor
-    constructor(placa: string, fecha: string, hora: string) {
+    constructor(placa, fecha, hora) {
         this.placa = placa;
         this.fecha = fecha;
         this.hora = hora;
     }
-
     //getters
-    getPlaca(): string {
+    getPlaca() {
         return this.placa;
     }
-    getFecha(): string {
+    getFecha() {
         return this.fecha;
     }
-    getHora(): string {
+    getHora() {
         return this.hora;
     }
-
     //setters
-    setPlaca(placa: string) {
+    setPlaca(placa) {
         this.placa = placa;
     }
-    setFecha(fecha: string) {
+    setFecha(fecha) {
         this.fecha = fecha;
     }
-    setHora(hora: string) {
+    setHora(hora) {
         this.hora = hora;
     }
 }
+exports.Automovil = Automovil;

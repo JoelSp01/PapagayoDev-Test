@@ -1,66 +1,54 @@
-import { Automovil } from "./automovil";
-
-export class Operaciones {
-    automovil: Automovil;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Operaciones = void 0;
+class Operaciones {
     //constructor
-    constructor(automovil: Automovil) {
+    constructor(automovil) {
         this.automovil = automovil;
     }
-
-    private validarDia(): boolean {
-        const ultimoDigito: string = this.automovil.getPlaca().slice(-1);
-        const fecha: string = this.automovil.getFecha();
-
-
+    validarDia() {
+        var _a, _b;
+        const ultimoDigito = this.automovil.getPlaca().slice(-1);
+        const fecha = this.automovil.getFecha();
         const fechaObjeto = new Date(fecha + 'T00:00:00');
-
         // Obtenemos el día de la semana
-        const diaDeLaSemana = fechaObjeto.getDay(); 
-
+        const diaDeLaSemana = fechaObjeto.getDay();
         // Días de la semana bloqueados según el último dígito de la placa
-        const bloqueados: { [key: number]: string[] } = {
+        const bloqueados = {
             1: ['1', '2'],
             2: ['3', '4'],
             3: ['5', '6'],
             4: ['7', '8'],
             5: ['9', '0'],
         };
-
         // Si es fin de semana, no hay restricción por día
         if (diaDeLaSemana === 0 || diaDeLaSemana === 6) {
             return false; // Puede circular
         }
-
         // Verificamos si el último dígito está restringido en el día actual
-        return bloqueados[diaDeLaSemana]?.includes(ultimoDigito) ?? false;
+        return (_b = (_a = bloqueados[diaDeLaSemana]) === null || _a === void 0 ? void 0 : _a.includes(ultimoDigito)) !== null && _b !== void 0 ? _b : false;
     }
-
-
-    validarHora(hora: string): boolean {
+    validarHora(hora) {
         //Separar hora y minutos
         const [horaParte, minutosParte] = hora.split(":").map(Number);
         const minutosTotales = horaParte * 60 + minutosParte;
-
         // Intervalo de horas
         const inicioRango1 = 6 * 60;
         const finRango1 = 9 * 60 + 30;
-
         const inicioRango2 = 16 * 60;
         const finRango2 = 21 * 60;
-
         return (minutosTotales >= inicioRango1 && minutosTotales <= finRango1) ||
             (minutosTotales >= inicioRango2 && minutosTotales <= finRango2);
     }
-
-
-    puedeCircular(): String {
-        const hora: string = this.automovil.getHora();
+    puedeCircular() {
+        const hora = this.automovil.getHora();
         //condicon para circular
         if (this.validarDia() && this.validarHora(hora)) {
             return "No puede circular";
-        } else {
+        }
+        else {
             return "Puede circular";
         }
     }
-
 }
+exports.Operaciones = Operaciones;
