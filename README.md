@@ -6,13 +6,16 @@ Este proyecto implementa un predictor para determinar si un automóvil puede cir
 
 ## Descripción del Proyecto
 
-El sistema se divide en dos componentes principales:
+El sistema se divide en 3 clases principales:
 
 1. **Clase Automovil**: Representa los atributos básicos de un automóvil, como la placa, la fecha y la hora en que se realiza la consulta.
 2. **Clase Operaciones**: Contiene la lógica necesaria para determinar si el automóvil puede circular o no, basada en:
    - Último dígito de la placa.
    - Día de la semana (restricciones específicas por dígito).
    - Rango de horas restringidas para la circulación.
+3. **Clase Verificaciones**: Se encarga de validar los datos ingresados por el usuario, garantizando que la información sea correcta antes de realizar cualquier operación. Su función principal incluye:
+   - Verificación de la fecha, verificando que sea una fecha válida.
+   - Verificación de la hora, asegurando que el formato sea correcto.
 
 Además, se creó un archivo de pruebas para validar la lógica y asegurar que el sistema funcione correctamente bajo diferentes escenarios.
 
