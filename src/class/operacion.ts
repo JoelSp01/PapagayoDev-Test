@@ -1,30 +1,20 @@
 import { Automovil } from "./automovil";
+import { Verificaciones } from "./verificaciones";
 
 export class Operaciones {
     automovil: Automovil;
+    verificaciones: Verificaciones;
     //constructor
     constructor(automovil: Automovil) {
         this.automovil = automovil;
-        if (!this.verificarFecha(this.automovil.getFecha())) {
+        this.verificaciones = new Verificaciones();
+        if (!this.verificaciones.verificarFecha(this.automovil.getFecha())) {
             throw new Error("Ingresar bien la fecha");
         }
 
-        if (!this.verificarHora(this.automovil.getHora())) {
+        if (!this.verificaciones.verificarHora(this.automovil.getHora())) {
             throw new Error("Ingresar bien la hora");
         }
-    }
-
-    // Método para validar la fecha
-    private verificarFecha(fecha: string): boolean {
-        const fechaObjeto = new Date(fecha);
-        return !isNaN(fechaObjeto.getTime());  // Verifica si la fecha es válida
-    }
-
-    // Validar hora en formato HH:mm
-    private verificarHora(hora: string): boolean {
-        // Expresión regular para validar el formato HH:mm
-        const regex = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
-        return regex.test(hora);
     }
 
     private validarDia(): boolean {

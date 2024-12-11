@@ -1,4 +1,4 @@
-/* export class Verificaiones {
+export class Verificaciones {
     // Método para validar la fecha
     public verificarFecha(fecha: string): boolean {
         const fechaObjeto = new Date(fecha);
@@ -11,4 +11,4 @@
         const regex = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
         return regex.test(hora);
     }
-} */
+}

@@ -1,5 +1,6 @@
 import { Automovil } from "../class/automovil";  // Ajusta según la ubicación real
 import { Operaciones } from "../class/operacion";  // Ajusta según la ubicación real
+import { Verificaciones } from "../class/verificaciones";
 
 describe('Pruebas de la clase Operaciones', () => {
 
@@ -32,5 +33,40 @@ describe('Pruebas de la clase Operaciones', () => {
         const operaciones = new Operaciones(automovil);
         expect(operaciones.puedeCircular()).toBe("Puede circular");
     });
+
+    // Pruebas para la clase Verificaciones
+    describe('Pruebas de la clase Verificaciones', () => {
+        let verificaciones: Verificaciones;
+
+        beforeEach(() => {
+            verificaciones = new Verificaciones(); // Instanciamos la clase Verificaciones antes de cada prueba
+        });
+
+        it('Debe devolver true para una fecha válida', () => {
+            const resultado = verificaciones.verificarFecha('2024-12-10');
+            expect(resultado).toBe(true);
+        });
+
+        it('Debe devolver false para una fecha inválida', () => {
+            const resultado = verificaciones.verificarFecha('2024-11-33');
+            expect(resultado).toBe(false);
+        });
+
+        it('Debe devolver true para una hora válida en formato HH:mm', () => {
+            const resultado = verificaciones.verificarHora('14:30');
+            expect(resultado).toBe(true);
+        });
+
+        it('Debe devolver false para una hora inválida en formato HH:mm', () => {
+            const resultado = verificaciones.verificarHora('25:00');
+            expect(resultado).toBe(false);
+        });
+
+        it('Debe devolver false para una hora con minutos inválidos en formato HH:mm', () => {
+            const resultado = verificaciones.verificarHora('14:60');
+            expect(resultado).toBe(false);
+        });
+    });
+
 
 });
