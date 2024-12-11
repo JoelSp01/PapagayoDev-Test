@@ -5,17 +5,40 @@ export class Operaciones {
     //constructor
     constructor(automovil: Automovil) {
         this.automovil = automovil;
+        if (!this.verificarFecha(this.automovil.getFecha())) {
+            throw new Error("Ingresar bien la fecha");
+        }
+
+        if (!this.verificarHora(this.automovil.getHora())) {
+            throw new Error("Ingresar bien la hora");
+        }
+    }
+
+    // Método para validar la fecha
+    private verificarFecha(fecha: string): boolean {
+        const fechaObjeto = new Date(fecha);
+        return !isNaN(fechaObjeto.getTime());  // Verifica si la fecha es válida
+    }
+
+    // Validar hora en formato HH:mm
+    private verificarHora(hora: string): boolean {
+        // Expresión regular para validar el formato HH:mm
+        const regex = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
+        return regex.test(hora);
     }
 
     private validarDia(): boolean {
         const ultimoDigito: string = this.automovil.getPlaca().slice(-1);
         const fecha: string = this.automovil.getFecha();
 
+        if (isNaN(Number(ultimoDigito))) {
+            throw new Error("La placa es inválida. El último dígito debe ser un número.");
+        }
 
         const fechaObjeto = new Date(fecha + 'T00:00:00');
 
         // Obtenemos el día de la semana
-        const diaDeLaSemana = fechaObjeto.getDay(); 
+        const diaDeLaSemana = fechaObjeto.getDay();
 
         // Días de la semana bloqueados según el último dígito de la placa
         const bloqueados: { [key: number]: string[] } = {

@@ -5,11 +5,31 @@ class Operaciones {
     //constructor
     constructor(automovil) {
         this.automovil = automovil;
+        if (!this.verificarFecha(this.automovil.getFecha())) {
+            throw new Error("Ingresar bien la fecha");
+        }
+        if (!this.verificarHora(this.automovil.getHora())) {
+            throw new Error("Ingresar bien la hora");
+        }
+    }
+    // Método para validar la fecha
+    verificarFecha(fecha) {
+        const fechaObjeto = new Date(fecha);
+        return !isNaN(fechaObjeto.getTime()); // Verifica si la fecha es válida
+    }
+    // Validar hora en formato HH:mm
+    verificarHora(hora) {
+        // Expresión regular para validar el formato HH:mm
+        const regex = /^([01]?[0-9]|2[0-3]):([0-5]?[0-9])$/;
+        return regex.test(hora);
     }
     validarDia() {
         var _a, _b;
         const ultimoDigito = this.automovil.getPlaca().slice(-1);
         const fecha = this.automovil.getFecha();
+        if (isNaN(Number(ultimoDigito))) {
+            throw new Error("La placa es inválida. El último dígito debe ser un número.");
+        }
         const fechaObjeto = new Date(fecha + 'T00:00:00');
         // Obtenemos el día de la semana
         const diaDeLaSemana = fechaObjeto.getDay();
